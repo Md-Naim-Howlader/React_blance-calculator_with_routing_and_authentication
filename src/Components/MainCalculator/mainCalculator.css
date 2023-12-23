@@ -1,0 +1,132 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1,  h2, h3,  h4,  h5 {
+    margin-bottom: 5px;
+}
+.borderBottom {
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #27ae60;
+    margin-bottom: 10px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+/* main card style start */
+.card {
+    width: 400px;
+    padding: 20px 30px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: #111;
+    border-radius: 5px;
+}
+.cardContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* main card style end */
+/* income expense component style start */
+.incomeExpense {
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 19px 10px;
+    align-items: center;
+    text-align: center;
+    color: #000;
+}
+.expense {
+    border-left: 1px solid #bdc3c7;
+    padding-left: 56px;
+}
+
+.incomeBlance {
+    color: #27ae60;
+}
+.expenseBlance {
+    color: #c0392b;
+}
+/* income expense component style end */
+
+
+/* Transection List component style start  */
+.transectionList {
+    padding: 20px 0;
+    border-bottom: 2px solid #8f8b8b;
+}
+/* Transection List component style end */
+
+/* Add Transection component style start */
+.addTranseciton {
+    margin-top: 20px;
+}
+.addTranseciton form input {
+    padding: 11px 15px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin-bottom: 10px;
+}
+.addTranseciton form button {
+    padding: 11px 10px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background: #27ae60;
+    width: 100%;
+}
+/* Add Transection component style end */
+
+/* Transection Component Start */
+.plus {
+    border-right: 5px solid #27ae60;
+}
+.minus {
+    border-right: 5px solid #c0392b;
+}
+.transection {
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-bottom: 10px;
+    padding: 10px 5px;
+    border-radius: 0 5px 5px 0;
+  
+    position: relative;
+}
+.transectionItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.transection .btn {
+    position: absolute;
+    left: -29px;
+    top: 0px;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+.transection:hover .btn {
+    opacity: 1;
+}
+.transection .btn button {
+    background: #c0392b;
+    padding: 5px 1px;
+    color: #fff;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px 0 0 5px;
+}
+
+/* Transection Component End */

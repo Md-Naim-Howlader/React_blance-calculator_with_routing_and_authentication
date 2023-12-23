@@ -1,0 +1,23 @@
+footer {
+  background: #fff;
+  padding: 30px 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.footerWraper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footerIcon {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+.footerIcon li {
+  margin: 0 10px;
+  font-size: 22px;
+}
