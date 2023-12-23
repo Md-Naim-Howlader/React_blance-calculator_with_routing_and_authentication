@@ -1,6 +1,9 @@
 const Loading = () => {
   return (
-    <div style={{ textAlign: "center" }} className="container">
+    <div
+      style={{ textAlign: "center", height: "50px 0" }}
+      className="container"
+    >
       <h3>Authenticaion Loading...</h3>
       <img
         style={{ width: "100px" }}
