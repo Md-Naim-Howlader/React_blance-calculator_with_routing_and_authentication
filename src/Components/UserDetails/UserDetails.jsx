@@ -10,6 +10,7 @@ const UserDetails = () => {
     website,
     company: { name: cname },
   } = user;
+
   return (
     <div className="container">
       <div style={{ maxWidth: "100%", margin: "30px 0" }} className="user">

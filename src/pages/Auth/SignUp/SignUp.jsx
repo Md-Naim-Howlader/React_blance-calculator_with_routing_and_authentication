@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 // toastify
 import { toast } from "react-toastify";
@@ -26,13 +26,10 @@ import {
 import auth from "../../../firebase/firebase.config";
 import Loading from "../../../Components/Loading/Loading";
 import FireBaseError from "../../../Components/fireBaseError/FireBaseError";
+
 // auth import end
 
 const SignUp = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [Cpassword, setConfPassword] = useState("");
   const navigate = useNavigate();
   // authentication start
   // google auth start
@@ -56,7 +53,7 @@ const SignUp = () => {
 
   // crate user start
   const [createUserWithEmailAndPassword, user, userLoading, userError] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   // crate user end
 
   const handleGoBack = () => {
@@ -69,7 +66,8 @@ const SignUp = () => {
     const password = e.target.password.value;
     const confirmPassword = e.target.Cpassword.value;
 
-    console.log(name, email, password, confirmPassword);
+    console.log(displayName, email, password, confirmPassword);
+
     if (password !== confirmPassword) {
       return toast.error("Password Not Match!");
     }
@@ -90,15 +88,25 @@ const SignUp = () => {
     return <Loading />;
   }
   // error
-  let errorElement;
+
   if (googleError || userError || updateError || githubError || facebookError) {
-    errorElement =
-      googleError.message ||
-      githubError.message ||
-      userError.message ||
-      facebookError.message;
-    return <FireBaseError errorName={errorElement} />;
+    if (googleError) {
+      return <FireBaseError errorMessege={googleError} />;
+    }
+    if (userError) {
+      return <FireBaseError errorMessege={userError} />;
+    }
+    if (updateError) {
+      return <FireBaseError errorMessege={updateError} />;
+    }
+    if (githubError) {
+      return <FireBaseError errorMessege={githubError} />;
+    }
+    if (facebookError) {
+      return <FireBaseError errorMessege={facebookError} />;
+    }
   }
+
   if (googleUser || user || githubUser || facebookUser) {
     navigate("/");
     toast.success("Sign Up Successfully!");
@@ -114,31 +122,15 @@ const SignUp = () => {
         <form onSubmit={handleSignUp}>
           <div>
             <label htmlFor="email">Full Name:</label>
-            <input
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              required
-              type="text"
-              name="name"
-              id="fullname"
-            />
+            <input required type="text" name="name" id="fullname" />
           </div>
           <div>
             <label htmlFor="email">Email Address:</label>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              required
-              type="email"
-              name="email"
-              id="email"
-            />
+            <input required type="email" name="email" id="email" />
           </div>
           <div>
             <label htmlFor="password">Password:</label>
             <input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
               required
               min="6"
               max="9"
@@ -150,8 +142,6 @@ const SignUp = () => {
           <div>
             <label htmlFor="cpassword">Confirm password:</label>
             <input
-              onChange={(e) => setConfPassword(e.target.value)}
-              value={Cpassword}
               required
               min="6"
               max="9"
@@ -161,7 +151,6 @@ const SignUp = () => {
             />
           </div>
           <button type="submit">Sign Up</button>
-          {errorElement}
         </form>
         <div className={socialIcons}>
           <button onClick={() => signInWithGoogle()}>

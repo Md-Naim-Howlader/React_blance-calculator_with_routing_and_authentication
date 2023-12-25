@@ -4,6 +4,7 @@ import {
   useSignInWithGoogle,
   useSignInWithGithub,
   useSignInWithFacebook,
+  useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 // social icons
 import { FcGoogle } from "react-icons/fc";
@@ -20,6 +21,13 @@ import FireBaseError from "../../../Components/fireBaseError/FireBaseError";
 const LogIn = () => {
   const navigate = useNavigate();
 
+  // loginWithEmailAndPassword
+  const [
+    signInWithEmailAndPassword,
+    user,
+    emailPasswordLoading,
+    emailPasswrdError,
+  ] = useSignInWithEmailAndPassword(auth);
   // google login
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
@@ -31,31 +39,54 @@ const LogIn = () => {
   const [signInWithFacebook, facebookUser, facebookLoading, facebookError] =
     useSignInWithFacebook(auth);
   // facebook  login end
-  if (googleLoading || githubLoading || facebookLoading) {
+  if (
+    googleLoading ||
+    githubLoading ||
+    facebookLoading ||
+    emailPasswordLoading
+  ) {
     return <Loading />;
   }
   // error
-  let errorElement;
-  if (googleError || githubError || facebookError) {
-    errorElement =
-      googleError.message || githubError.message || facebookError.message;
-    return <FireBaseError errorName={errorElement} />;
+  if (googleError || githubError || facebookError || emailPasswrdError) {
+    if (googleError) {
+      return <FireBaseError errorMessege={googleError} />;
+    }
+
+    if (githubError) {
+      return <FireBaseError errorMessege={githubError} />;
+    }
+    if (facebookError) {
+      return <FireBaseError errorMessege={facebookError} />;
+    }
+    if (emailPasswrdError) {
+      return <FireBaseError errorMessege={emailPasswrdError} />;
+    }
   }
-  if (googleUser || githubUser || facebookUser) {
+
+  if (user || googleUser || githubUser || facebookUser) {
     navigate("/");
     toast.success("Log In Successfully!");
   }
+
+  const handleSubmit = (e) => {
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    if (email && password) {
+      signInWithEmailAndPassword(email, password);
+    }
+  };
 
   return (
     <div style={{ padding: "50px 0" }}>
       <div className={signUp}>
         <h1>Log In</h1>
-        {errorElement}
         <p>
           Don&apos;t have an account?{" "}
           <NavLink to="/signUp">Create a free account</NavLink>
         </p>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="email">Email Address:</label>
             <input required type="email" name="email" id="email" />

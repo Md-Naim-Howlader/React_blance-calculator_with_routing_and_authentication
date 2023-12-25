@@ -1,13 +1,15 @@
+import lodingImg from "../../assets/images/ZNeT.gif";
+
 const Loading = () => {
   return (
     <div
-      style={{ textAlign: "center", padding: "50px 0" }}
+      style={{ textAlign: "center", padding: "170px 0" }}
       className="container"
     >
       <h3>Authenticaion Loading...</h3>
       <img
-        style={{ width: "100px" }}
-        src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif"
+        style={{ width: "100px", marginTop: "30px" }}
+        src={lodingImg}
         alt=""
       />
     </div>
