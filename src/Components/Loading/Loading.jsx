@@ -6,7 +6,7 @@ const Loading = () => {
       style={{ textAlign: "center", padding: "170px 0" }}
       className="container"
     >
-      <h3>Authenticaion Loading...</h3>
+      <h3> Loading...</h3>
       <img
         style={{ width: "100px", marginTop: "30px" }}
         src={lodingImg}
